@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>SBSample6</title>
+</head>
+<body>
+	<div><a th:href="@{/write}">書き込み </a></div>
+	<br>
+	<table th:if="${list.size() > 0}" border="1">
+		<tr>
+			<th>日にち</th>
+			<th>分類</th>
+			<th>名称</th>
+			<th>価格</th>
+		</tr>
+		<tr th:each="e:${list}">
+			<td th:text="${e.date}"></td>
+			<td th:text=" ${e.classification}"></td>
+			<td th:text="${e.name}"></td>
+			<td th:text="${e.price}"></td>
+		</tr>
+		<tr>
+			<td colspan="2">合計</td>
+			<td colspan="2" th:text="${totalPrice}"></td>
+		</tr>
+	</table>
+	<br>
+	
+	<form th:action="@{/classification}" method="get">
+		分類の検索
+		<select name="classification">
+			<option value="食品">食品</option>
+			<option value="日用品">日用品</option>
+			<option value="その他">その他</option>
+		</select>
+		<input type="submit" value="検索">
+	</form>
+	<form th:action="@{/nameLike}" method="get">
+		名称の曖昧検索
+		<input type="text" name="name">
+		<input type="submit" value="検索">
+	</form>
+	
+	<!--問題２-->
+	<form th:action="@{/date}" method="get">
+		日にち検索
+		<input type="date" name="datefrom">～
+		<input type="date" name="dateto">
+		<input type="submit" value="検索">
+	</form>
+	
+	<div><a th:href="@{/top}">全件表示</a></div>
+</body>
+</html>
